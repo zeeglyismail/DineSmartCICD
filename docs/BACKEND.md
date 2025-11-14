@@ -23,7 +23,7 @@ This document explains how to set up, run, and extend the backend API.
 
    pip install -r requirements.txt
 
-python manage.py makemigraions
+python manage.py makemigrations
 
 4. Apply migrations:
 

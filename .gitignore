@@ -15,9 +15,6 @@ venv/
 db.sqlite3
 *.pyo
 
-Migrations
-**/migrations/*
-!**/migrations/__init__.py
 
 # Static files and media
 /static/
