@@ -21,10 +21,14 @@ services:
     restart: on-failure
     command: >
       sh -c "python manage.py migrate &&
-              python manage.py runserver 0.0.0.0:8000"
+             python manage.py shell < create_superuser.py &&
+             python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     environment:
+      DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME}
+      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD}
       EMAIL_HOST_USER: ${EMAIL_HOST_USER}
       EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
       SECRET_KEY: ${SECRET_KEY}
@@ -43,6 +47,8 @@ services:
     restart: on-failure
     ports:
       - "3000:80"
+    environment:
+      VITE_BACKEND_BASE_API: ${VITE_BACKEND_BASE_API}
     depends_on:
       - backend
     networks:
